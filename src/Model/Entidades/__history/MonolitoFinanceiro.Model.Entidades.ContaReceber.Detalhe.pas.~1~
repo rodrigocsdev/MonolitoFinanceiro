@@ -1,0 +1,7 @@
+unit MonolitoFinanceiro.Model.Entidades.ContaReceber.Detalhe;
+
+interface
+
+implementation
+
+end.

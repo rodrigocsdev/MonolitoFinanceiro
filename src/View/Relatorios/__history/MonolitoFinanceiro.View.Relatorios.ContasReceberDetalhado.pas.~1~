@@ -1,0 +1,25 @@
+unit MonolitoFinanceiro.View.Relatorios.ContasReceberDetalhado;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  MonolitoFinanceiro.View.Relatorios.PadraoAgrupado, Data.DB, RLReport;
+
+type
+  TRelPadraoAgrupado1 = class(TRelPadraoAgrupado)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  RelPadraoAgrupado1: TRelPadraoAgrupado1;
+
+implementation
+
+{$R *.dfm}
+
+end.

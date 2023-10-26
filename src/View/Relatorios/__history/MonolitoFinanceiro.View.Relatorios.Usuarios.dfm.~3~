@@ -1,0 +1,5 @@
+inherited RelPadrao1: TRelPadrao1
+  Caption = 'RelPadrao1'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

@@ -1,0 +1,5 @@
+inherited RelPadraoAgrupado1: TRelPadraoAgrupado1
+  Caption = 'RelPadraoAgrupado1'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

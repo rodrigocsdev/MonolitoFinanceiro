@@ -1,0 +1,148 @@
+unit MonolitoFinanceiro.View.ContasReceber;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, MonolitoFinanceiro.View.CadastroPadrao,
+  Data.DB, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,
+  Vcl.ExtCtrls, Vcl.WinXPanels,
+  MonolitoFinanceiro.Model.ContasReceber, Datasnap.DBClient, Vcl.WinXCtrls,
+  Vcl.ComCtrls;
+
+type
+  TfrmContasReceber = class(TfrmCadastroPadrao)
+    cdsParcelas: TClientDataSet;
+    cdsParcelasParcela: TIntegerField;
+    cdsParcelasDocumento: TStringField;
+    cdsParcelasVencimento: TDateField;
+    cdsParcelasValor: TCurrencyField;
+    dsParcelas: TDataSource;
+    Label3: TLabel;
+    edtDescricao: TEdit;
+    Label2: TLabel;
+    edtValorVenda: TEdit;
+    Label4: TLabel;
+    dateVenda: TDateTimePicker;
+    Label9: TLabel;
+    toggleParcelamento: TToggleSwitch;
+    CardParcela: TCardPanel;
+    cardParcelaUnica: TCard;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    edtNumeroDocumento: TEdit;
+    edtParcela: TEdit;
+    edtValorParcela: TEdit;
+    dateVencimento: TDateTimePicker;
+    cardParcelamento: TCard;
+    Label10: TLabel;
+    Label11: TLabel;
+    edtParcelas: TEdit;
+    edtIntervaloDias: TEdit;
+    btnGerar: TButton;
+    btnLimpar: TButton;
+    DBGrid2: TDBGrid;
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+  private
+    { Private declarations }
+    procedure CadastrarParcelamento;
+    procedure CadastrarParcelaUnica;
+  public
+    { Public declarations }
+  protected
+    procedure Pesquisar; override;
+  end;
+
+var
+  frmContasReceber: TfrmContasReceber;
+
+implementation
+
+uses
+  MonolitoFinanceiro.Utilitarios;
+
+{$R *.dfm}
+
+{ TfrmContasReceber }
+
+procedure TfrmContasReceber.btnAlterarClick(Sender: TObject);
+begin
+  if dmContasReceber.cdsContasReceberstatus.AsString = 'B' then
+  begin
+    Application.MessageBox('O documento já foi baixado e não pode ser alterado.', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;
+  end;
+
+  if dmContasReceber.cdsContasReceberstatus.AsString = 'C' then
+  begin
+    Application.MessageBox('O documento já foi cancelado e não pode ser alterado.', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;
+  end;
+
+  inherited;
+
+  toggleParcelamento.Enabled := False;
+  toggleParcelamento.State := tssOff;
+  CardParcela.ActiveCard := cardParcelaUnica;
+  cdsParcelas.EmptyDataSet;
+
+
+  edtNumeroDocumento.Text := dmContasReceber.cdsContasRecebernumero_documento.AsString;
+  edtDescricao.Text := dmContasReceber.cdsContasReceberdescricao.AsString;
+  edtValorVenda.Text := TUtilitarios.FormatarValor(dmContasReceber.cdsContasRecebervalor_venda.AsCurrency);
+  dateVenda.DateTime := dmContasReceber.cdsContasReceberdata_venda.AsDateTime;
+  edtParcela.Text := dmContasReceber.cdsContasReceberparcela.AsString;
+  edtValorParcela.Text := dmContasReceber.cdsContasRecebervalor_parcela.AsString;
+  dateVencimento.DateTime := dmContasReceber.cdsContasReceberdata_vencimento.AsDateTime;
+
+end;
+
+procedure TfrmContasReceber.btnExcluirClick(Sender: TObject);
+begin
+  if dmContasReceber.cdsContasReceberstatus.AsString = 'C' then
+  begin
+    Application.MessageBox('O documento já se encontra cancelado.', 'Atenção', MB_OK + MB_ICONWARNING);
+    abort;
+  end;
+
+  if Application.MessageBox('Deseja realmente cancelar esse documento?', 'Pergunta', MB_YESNO + MB_ICONQUESTION) <> mrYes then
+    exit;
+
+  try
+    dmContasReceber.cdsContasReceber.Edit;
+    dmContasReceber.cdsContasReceberstatus.AsString := 'C';
+    dmContasReceber.cdsContasReceber.Post;
+    dmContasReceber.cdsContasReceber.ApplyUpdates(0);
+    Application.MessageBox('Documento cancelado com sucesso!', 'Atenção', MB_OK + MB_ICONINFORMATION);
+    Pesquisar;
+  except on E : Exception do
+    Application.MessageBox(PWideChar(E.Message), 'Erro ao cancelar documento', MB_OK + MB_ICONERROR);
+  end;
+end;
+
+procedure TfrmContasReceber.CadastrarParcelamento;
+begin
+
+end;
+
+procedure TfrmContasReceber.CadastrarParcelaUnica;
+begin
+
+end;
+
+procedure TfrmContasReceber.Pesquisar;
+var
+  FiltroPesquisa : string;
+begin
+  FiltroPesquisa := TUtilitarios.LikeFind(edtPesquisar.Text, DBGrid1);
+  dmContasReceber.cdsContasReceber.Close;
+  dmContasReceber.cdsContasReceber.CommandText := 'Select * from Contas_Receber where 1 = 1' + FiltroPesquisa;
+  dmContasReceber.cdsContasReceber.Open;
+  inherited;
+
+end;
+
+end.

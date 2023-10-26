@@ -1,0 +1,65 @@
+unit MonolitoFinanceiro.View.Caixa.Extrato;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls,
+  Vcl.ExtCtrls, System.ImageList, Vcl.ImgList, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  MonolitoFinanceiro.Model.Caixa;
+
+type
+  TfrmCaixaExtrato = class(TForm)
+    ImageList1: TImageList;
+    pnlPrincipal: TPanel;
+    pnlPesquisar: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    btnPesquisar: TButton;
+    dateInicial: TDateTimePicker;
+    dateFinal: TDateTimePicker;
+    pnlContent: TPanel;
+    pnlPesquisarBotoes: TPanel;
+    btnFechar: TButton;
+    btnImprimir: TButton;
+    DBGrid1: TDBGrid;
+    DataSource1: TDataSource;
+    procedure btnFecharClick(Sender: TObject);
+    procedure btnPesquisarClick(Sender: TObject);
+  private
+    { Private declarations }
+    procedure Pesquisar;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCaixaExtrato: TfrmCaixaExtrato;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmCaixaExtrato.btnFecharClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfrmCaixaExtrato.btnPesquisarClick(Sender: TObject);
+begin
+  Pesquisar;
+end;
+
+procedure TfrmCaixaExtrato.Pesquisar;
+var
+  SQL : string;
+begin
+  SQl := 'SELECT * FROM CAIXA';
+
+  dmCaixa.sqlCaixaExtrato.Close;
+  dmCaixa.sqlCaixaExtrato.SQL.Clear;
+  dmCaixa.sqlCaixaExtrato.SQL.Add(SQL);
+  dmCaixa.sqlCaixaExtrato.Open;
+end;
+
+end.

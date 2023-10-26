@@ -1,0 +1,25 @@
+unit MonolitoFinanceiro.View.Relatorios.ContasPagar;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  MonolitoFinanceiro.View.Relatorios.Padrao, Data.DB, RLReport;
+
+type
+  TRelPadrao1 = class(TRelPadrao)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  RelPadrao1: TRelPadrao1;
+
+implementation
+
+{$R *.dfm}
+
+end.
