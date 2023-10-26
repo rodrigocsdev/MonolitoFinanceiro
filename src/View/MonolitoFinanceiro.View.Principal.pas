@@ -3,9 +3,19 @@ unit MonolitoFinanceiro.View.Principal;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus,
-  MonolitoFinanceiro.View.Usuarios, Vcl.ComCtrls, Vcl.ExtCtrls;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.Menus,
+  MonolitoFinanceiro.View.Usuarios,
+  Vcl.ComCtrls,
+  Vcl.ExtCtrls;
 
 type
   TfrmPrincipal = class(TForm)
@@ -24,6 +34,7 @@ type
     mnuContasReceberConsultar: TMenuItem;
     mnuContasPagarConsultar: TMenuItem;
     mnuExtratoCaixa: TMenuItem;
+    mbWhatsapp: TMenuItem;
     procedure mnuUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -34,6 +45,7 @@ type
     procedure mnuContasReceberConsultarClick(Sender: TObject);
     procedure mnuContasPagarConsultarClick(Sender: TObject);
     procedure mnuExtratoCaixaClick(Sender: TObject);
+    procedure mbWhatsappClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -103,7 +115,14 @@ begin
     end;
   end;
 
-  StatusBar1.Panels.Items[1].Text := 'Usuário: ' + dmUsuarios.GetUsuarioLogado.Nome;
+  StatusBar1.Panels.Items[1].Text := 'Usuário: ' +
+    dmUsuarios.GetUsuarioLogado.Nome;
+end;
+
+procedure TfrmPrincipal.mbWhatsappClick(Sender: TObject);
+begin
+  Application.MessageBox('Tel.(16) 9 9771-2870',
+    'Suporte Via Telefone e Whatsapp!', MB_ICONINFORMATION + MB_OK);
 end;
 
 procedure TfrmPrincipal.mnuCaixaClick(Sender: TObject);
@@ -138,7 +157,7 @@ end;
 
 procedure TfrmPrincipal.mnuResumoCaixaClick(Sender: TObject);
 begin
-  frmCaixaSaldo.show;
+  frmCaixaSaldo.Show;
 end;
 
 procedure TfrmPrincipal.mnuUsuariosClick(Sender: TObject);

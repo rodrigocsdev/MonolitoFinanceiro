@@ -2,8 +2,8 @@ object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
   Caption = 'Monolito Financeiro'
-  ClientHeight = 418
-  ClientWidth = 646
+  ClientHeight = 417
+  ClientWidth = 642
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,16 +11,14 @@ object frmPrincipal: TfrmPrincipal
   Font.Name = 'Tahoma'
   Font.Style = []
   Menu = MainMenu1
-  OldCreateOrder = False
   Position = poScreenCenter
   WindowState = wsMaximized
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 19
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 392
-    Width = 646
+    Top = 391
+    Width = 642
     Height = 26
     Panels = <
       item
@@ -76,6 +74,10 @@ object frmPrincipal: TfrmPrincipal
     end
     object mnuAjuda: TMenuItem
       Caption = 'Ajuda'
+      object mbWhatsapp: TMenuItem
+        Caption = 'Whatsapp'
+        OnClick = mbWhatsappClick
+      end
     end
   end
   object Timer1: TTimer
