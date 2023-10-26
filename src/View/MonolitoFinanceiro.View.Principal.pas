@@ -34,7 +34,6 @@ type
     procedure mnuContasReceberConsultarClick(Sender: TObject);
     procedure mnuContasPagarConsultarClick(Sender: TObject);
     procedure mnuExtratoCaixaClick(Sender: TObject);
-    procedure mnuAjudaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -105,11 +104,6 @@ begin
   end;
 
   StatusBar1.Panels.Items[1].Text := 'Usuário: ' + dmUsuarios.GetUsuarioLogado.Nome;
-end;
-
-procedure TfrmPrincipal.mnuAjudaClick(Sender: TObject);
-begin
-ShowMessage('Chame no whatsapp 16997712870');
 end;
 
 procedure TfrmPrincipal.mnuCaixaClick(Sender: TObject);

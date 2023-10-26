@@ -11,9 +11,11 @@ object frmPrincipal: TfrmPrincipal
   Font.Name = 'Tahoma'
   Font.Style = []
   Menu = MainMenu1
+  OldCreateOrder = False
   Position = poScreenCenter
   WindowState = wsMaximized
   OnCreate = FormCreate
+  PixelsPerInch = 96
   TextHeight = 19
   object StatusBar1: TStatusBar
     Left = 0
@@ -27,8 +29,6 @@ object frmPrincipal: TfrmPrincipal
       item
         Width = 300
       end>
-    ExplicitTop = 391
-    ExplicitWidth = 642
   end
   object MainMenu1: TMainMenu
     Left = 496
@@ -76,7 +76,6 @@ object frmPrincipal: TfrmPrincipal
     end
     object mnuAjuda: TMenuItem
       Caption = 'Ajuda'
-      OnClick = mnuAjudaClick
     end
   end
   object Timer1: TTimer
